@@ -1,4 +1,4 @@
-Copyright (c) 2019 Yuichi Nakamura <yuichi.nakamura@jmty.jp>
+Copyright (c) 2019 Yuichi Nakamura <fyuichi@gmail.com>
 
 MIT License
 

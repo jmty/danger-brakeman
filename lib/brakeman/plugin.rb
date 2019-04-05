@@ -1,33 +1,47 @@
+require 'shellwords'
+
 module Danger
-  # This is your plugin class. Any attributes or methods you expose here will
-  # be available from within your Dangerfile.
-  #
-  # To be published on the Danger plugins site, you will need to have
-  # the public interface documented. Danger uses [YARD](http://yardoc.org/)
-  # for generating documentation from your plugin source, and you can verify
-  # by running `danger plugins lint` or `bundle exec rake spec`.
-  #
-  # You should replace these comments with a public description of your library.
-  #
-  # @example Ensure people are well warned about merging on Mondays
-  #
-  #          my_plugin.warn_on_mondays
-  #
-  # @see  Yuichi Nakamura/danger-brakeman
-  # @tags monday, weekends, time, rattata
-  #
+  # Run Ruby files through Brakeman.
+  # Results are passed out as a table in markdown.
   class DangerBrakeman < Plugin
+    # Runs Ruby files through Brakeman. Generates a `markdown` list of warnings.
+    def lint(config = nil)
+      files_to_lint = _fetch_files_to_lint
+      brakeman_result = _brakeman(files_to_lint)
 
-    # An attribute that you can read/write from your Dangerfile
-    #
-    # @return   [Array<String>]
-    attr_accessor :my_attribute
+      return if brakeman_result.nil?
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
-    #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+      _add_warning_for_each_line(brakeman_result)
+    end
+
+    private
+
+    def _brakeman(files_to_lint)
+      base_command = 'brakeman -q -f json --only-files'
+
+      brakeman_output = `#{'bundle exec ' if File.exist?('Gemfile')}#{base_command} #{files_to_lint}`
+
+      return [] if brakeman_output.empty?
+
+      JSON.parse(brakeman_output)['warnings']
+    end
+
+    def _add_warning_for_each_line(brakeman_result)
+      brakeman_result.each do |warning|
+        arguments = [
+          "[brakeman] #{warning['message']}",
+          {
+            file: warning['file'],
+            line: warning['line']
+          }
+        ]
+        warn(*arguments)
+      end
+    end
+
+    def _fetch_files_to_lint
+      to_lint = git.modified_files + git.added_files
+      Shellwords.join(to_lint).gsub(" ", ",")
     end
   end
 end

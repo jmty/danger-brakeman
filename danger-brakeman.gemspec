@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = 'danger-brakeman'
   spec.version       = Brakeman::VERSION
   spec.authors       = ['Yuichi Nakamura']
-  spec.email         = ['yuichi.nakamura@jmty.jp']
-  spec.description   = %q{A short description of danger-brakeman.}
-  spec.summary       = %q{A longer description of danger-brakeman.}
-  spec.homepage      = 'https://github.com/Yuichi Nakamura/danger-brakeman'
+  spec.email         = ['fyuichi@gmail.com']
+  spec.description   = %q{A danger plugin for running Ruby files through Brakeman.}
+  spec.summary       = %q{A danger plugin for running Ruby files through Brakeman.}
+  spec.homepage      = 'https://github.com/nakamurau1/danger-brakeman'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -18,10 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.add_dependency         'brakeman'
   spec.add_runtime_dependency 'danger-plugin-api', '~> 1.0'
 
   # General ruby development
-  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake', '~> 10.0'
 
   # Testing support

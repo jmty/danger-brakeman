@@ -1,1 +1,2 @@
-require "brakeman/gem_version"
+require 'brakeman/gem_version'
+
