@@ -3,6 +3,11 @@ require 'shellwords'
 module Danger
   # Run Ruby files through Brakeman.
   # Results are passed out as a table in markdown.
+  #
+  # @example Lint changed files
+  #
+  #          brakeman.lint
+  #
   class DangerBrakeman < Plugin
     # Runs Ruby files through Brakeman. Generates a `markdown` list of warnings.
     def lint(config = nil)
