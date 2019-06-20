@@ -1,20 +1,19 @@
-# danger-brakeman
+# Danger Brakeman
 
-A description of danger-brakeman.
+A Danger plugin for Brakeman.
 
 ## Installation
 
-    $ gem install danger-brakeman
+Add this line to your Gemfil.
+
+    gem 'danger-brakeman'
 
 ## Usage
 
-    Methods and attributes from this plugin are available in
-    your `Dangerfile` under the `brakeman` namespace.
+Run Ruby files through Brakeman. Results are passed out as a inline comment.
 
-## Development
+    brakeman.lint
 
-1. Clone this repo
-2. Run `bundle install` to setup dependencies.
-3. Run `bundle exec rake spec` to run the tests.
-4. Use `bundle exec guard` to automatically have tests run as you make changes.
-5. Make your changes.
+## License
+
+MIT
