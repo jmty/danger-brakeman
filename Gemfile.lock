@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    danger-brakeman (0.0.1)
+    danger-brakeman (0.0.2)
       brakeman
       danger-plugin-api (~> 1.0)
 
@@ -138,4 +138,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.0.1
+   2.0.2
