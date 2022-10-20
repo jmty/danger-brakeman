@@ -33,14 +33,12 @@ module Danger
 
     def _add_warning_for_each_line(brakeman_result)
       brakeman_result.each do |warning|
-        arguments = [
-          "[brakeman] #{warning['message']}",
-          {
-            file: warning['file'],
-            line: warning['line']
-          }
-        ]
-        warn(*arguments)
+        offense_message = "[brakeman] #{warning['message']}"
+        kw_args = {
+          file: warning['file'],
+          line: warning['line']
+        }
+        warn(offense_message, **kw_args)
       end
     end
 
