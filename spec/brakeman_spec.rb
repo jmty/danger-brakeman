@@ -69,8 +69,8 @@ module Danger
 
           outputs = @brakeman.violation_report[:warnings].map(&:to_s)
 
-          expect(outputs.first).to include('Violation [brakeman] Unsafe reflection method `constantize` called with parameter value { sticky: false, file: app/controllers/vuls_controller.rb, line: 45 }')
-          expect(outputs.last).to  include('Violation [brakeman] `protect_from_forgery` should be called in `VulsController` { sticky: false, file: app/vuls_controller.rb, line: 1 }')
+          expect(outputs.first).to include('Violation [brakeman] Unsafe reflection method `constantize` called with parameter value { sticky: false, file: app/controllers/vuls_controller.rb, line: 45, type: warning }')
+          expect(outputs.last).to  include('Violation [brakeman] `protect_from_forgery` should be called in `VulsController` { sticky: false, file: app/vuls_controller.rb, line: 1, type: warning }')
         end
       end
     end
